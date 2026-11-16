@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#17191C">
+  <meta name="description" content="Confira alterações bancárias, registre uma aprovação independente e consulte a evidência. Demonstração com dados fictícios.">
+  <title>Solicitações — Confere.</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/geist-400.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/app.css">
+  <script src="assets/data.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body class="app-page">
+  <a class="skip-link" href="#main-content">Ir para as solicitações</a>
+  <div class="app-shell" id="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand-link sidebar-brand" href="index.html" aria-label="Confere. — página inicial">Confere<span class="brand-dot">.</span></a>
+      <div class="workspace-selector">
+        <label for="company">Espaço de trabalho</label>
+        <div class="company-select"><span data-icon="building"></span><select id="company" aria-label="Filtrar empresa"><option value="all">Todas as empresas</option><option>Mercado Parque</option><option>Clínica Vila Serena</option></select></div>
+      </div>
+      <p class="sidebar-caption">OPERAÇÃO</p>
+      <nav class="sidebar-nav">
+        <button type="button" class="nav-item active" id="nav-queue" aria-current="page"><span data-icon="inbox"></span><span class="nav-label">Solicitações</span><span class="nav-count">2</span></button>
+        <button type="button" class="nav-item" id="nav-evidence"><span data-icon="file"></span><span class="nav-label">Evidência do pedido</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="demo-note"><span class="demo-dot"></span><span>Ambiente de demonstração</span></div>
+        <p class="sidebar-disclaimer">Dados fictícios. Decisões locais, perdidas ao recarregar a página. Nenhuma conta real é alterada.</p>
+        <button type="button" class="nav-item" id="reset"><span data-icon="reset"></span><span class="nav-label">Reiniciar demo</span></button>
+        <a class="nav-item" href="index.html"><span data-icon="arrow-up-right"></span><span class="nav-label">Conheça o Confere.</span></a>
+      </div>
+    </aside>
+    <header class="app-topbar">
+      <div class="app-breadcrumb"><span class="muted">Operação</span><span aria-hidden="true">/</span><strong>Alterações bancárias</strong></div>
+      <span class="top-demo-label">DEMONSTRAÇÃO</span>
+      <div class="actor-control"><span class="actor-avatar" id="actor-avatar" aria-hidden="true">LM</span><div><label for="actor">Operador da demo</label><select id="actor"><option value="livia">Lívia Mendes</option><option value="bruno">Bruno Reis</option><option value="camila">Camila Torres</option></select></div></div>
+    </header>
+    <main class="workspace" id="main-content" tabindex="-1">
+      <section class="queue-panel" aria-labelledby="queue-title">
+        <header class="queue-heading"><div><p class="eyebrow">Sua fila de trabalho</p><h1 id="queue-title">Solicitações <span id="queue-count">2</span></h1></div></header>
+        <div class="queue-tools">
+          <label class="search-control"><span data-icon="search"></span><span class="sr-only">Buscar fornecedor ou solicitação</span><input id="search" type="search" placeholder="Buscar fornecedor ou pedido" autocomplete="off"></label>
+          <div class="filter-row"><label for="status-filter">Status</label><select id="status-filter"><option value="all">Todos os status</option><option value="pending">Aguardando conferência</option><option value="review">Aguardando aprovação</option><option value="approved">Aprovadas</option><option value="rejected">Rejeitadas</option></select></div>
+          <div class="filter-row compact-company"><label for="company-compact">Empresa</label><select id="company-compact"><option value="all">Todas as empresas</option><option>Mercado Parque</option><option>Clínica Vila Serena</option></select></div>
+        </div>
+        <div class="queue-scroll" id="queue-scroll"><ul class="queue" id="queue" aria-label="Solicitações de alteração"></ul><div class="queue-empty" id="queue-empty" hidden><span data-icon="search"></span><h2>Nenhuma solicitação</h2><p>Tente outro fornecedor ou ajuste os filtros.</p><button type="button" class="button secondary" id="clear-filters">Limpar filtros</button></div></div>
+        <footer class="queue-footer"><span data-icon="shield"></span><span>Uma conferência. Uma revisão independente.</span></footer>
+      </section>
+      <article class="detail" id="detail" aria-labelledby="case-title">
+        <div class="detail-topline"><button type="button" class="button ghost back-button" id="back-to-queue"><span data-icon="arrow-left"></span>Solicitações</button><p class="case-reference" id="case-reference"></p><button type="button" class="button secondary evidence-top" id="open-evidence"><span data-icon="file"></span>Evidência</button></div>
+        <header class="case-heading"><div><p class="eyebrow" id="case-company"></p><h2 id="case-title" tabindex="-1"></h2></div><span class="pill" id="case-status"></span></header>
+        <div class="payment"><div><span class="payment-label">Próximo pagamento</span><strong id="payment-value"></strong></div><div class="payment-control"><span data-icon="shield"></span><span id="payment-gate"></span></div></div>
+        <ol class="progress-steps" aria-label="Etapas da solicitação" id="progress-steps"><li><span class="step-number">1</span><span>Conferência</span></li><li><span class="step-number">2</span><span>Aprovação</span></li><li><span class="step-number">3</span><span>Registro</span></li></ol>
+        <section class="bank-section" aria-labelledby="bank-title"><div class="section-heading"><h3 id="bank-title">O que está mudando</h3><span class="change-legend"><i></i>Campo alterado</span></div><div id="bank-comparison"></div><p class="comparison-note">Compare a conta cadastrada com a proposta antes de continuar.</p></section>
+        <div class="detail-columns">
+          <section class="workflow" aria-labelledby="step-title"><div class="section-heading"><h3 id="step-title"></h3><span class="step-caption" id="step-caption"></span></div><p id="step-help"></p>
+            <div class="contact-card" id="contact-card"><span class="contact-icon" data-icon="phone"></span><div><p class="eyebrow">Contato já cadastrado</p><p id="registered-contact"></p></div></div>
+            <div class="review-block" id="review-block" hidden><span data-icon="users"></span><p>Quem solicitou ou conferiu não pode aprovar. Selecione outro operador para continuar.</p><button type="button" class="button secondary" id="switch-actor">Trocar operador<span data-icon="arrow-right"></span></button></div>
+            <div class="closed-state" id="closed-state" hidden></div>
+            <form id="action" novalidate>
+              <div class="field" id="outcome-field"><label for="outcome">Resultado da conferência</label><select id="outcome" required aria-describedby="form-error"></select></div>
+              <div class="decision-field" id="decision-field" hidden><span class="field-label">Decisão da revisão</span><div class="decision-buttons" role="group" aria-label="Decisão da revisão"><button type="button" class="button decision-approve" data-decision="approved" aria-pressed="false"><span data-icon="check"></span>Aprovar alteração</button><button type="button" class="button danger" data-decision="rejected" aria-pressed="false"><span data-icon="close"></span>Rejeitar alteração</button></div></div>
+              <div class="field"><label for="notes" id="notes-label">Registro da conferência</label><textarea id="notes" rows="3" maxlength="240" minlength="6" required aria-describedby="notes-hint form-error"></textarea><div class="field-hint" id="notes-hint"><span>Descreva a conferência em 6 a 240 caracteres.</span><span id="notes-count">0 / 240</span></div></div>
+              <div class="check-group"><label class="check" id="contact-check-row"><input id="contact-check" type="checkbox"><span>Fiz a conferência pelo contato já cadastrado.</span></label><label class="check" id="ownership-check-row" hidden><input id="ownership-check" type="checkbox"><span>Conferi a titularidade da conta proposta.</span></label></div>
+              <p id="form-error" class="form-error" role="alert" hidden></p>
+              <div class="form-footer"><button class="button primary" id="submit" type="submit">Registrar conferência<span data-icon="arrow-right"></span></button><span id="action-note">A próxima etapa exige outro operador.</span></div>
+            </form>
+          </section>
+          <section class="history" aria-labelledby="history-title"><div class="section-heading"><h3 id="history-title">Histórico</h3><span class="event-count" id="event-count"></span></div><p class="history-description">Cada etapa, com autoria e contexto.</p><ol class="timeline" id="timeline"></ol><button type="button" class="history-evidence" id="history-evidence">Ver evidência completa<span data-icon="arrow-up-right"></span></button></section>
+        </div>
+        <footer class="detail-footer"><span>Dados simulados para demonstração.</span><span id="detail-id"></span></footer>
+      </article>
+      <section class="empty-detail" id="empty-detail" hidden><span data-icon="inbox"></span><h2>Nenhum pedido nesta seleção</h2><p>Limpe os filtros para voltar às solicitações.</p></section>
+    </main>
+  </div>
+  <dialog class="evidence-dialog" id="evidence-dialog" aria-labelledby="evidence-title"><div class="drawer-header"><div><p class="eyebrow">Documento da solicitação</p><h2 id="evidence-title">Evidência registrada</h2></div><button type="button" class="icon-button" id="close-evidence" aria-label="Fechar evidência"><span data-icon="close"></span></button></div><div class="evidence-content" id="evidence-content"></div><div class="drawer-actions"><button type="button" class="button secondary" id="export"><span data-icon="download"></span>Baixar JSON</button><button type="button" class="button primary" id="print-evidence"><span data-icon="printer"></span>Imprimir / PDF</button></div></dialog>
+  <dialog class="reset-dialog" id="reset-dialog" aria-labelledby="reset-title"><span class="reset-icon" data-icon="reset"></span><h2 id="reset-title">Reiniciar a demonstração?</h2><p>As decisões desta página serão apagadas. Os dois pedidos voltarão ao estado inicial. Recarregar a página também reinicia a demonstração.</p><div class="reset-actions"><button type="button" class="button secondary" id="cancel-reset">Continuar demo</button><button type="button" class="button primary" id="confirm-reset">Reiniciar demo</button></div></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  <div id="print-document" class="print-document"></div>
+  <noscript><p class="noscript-notice">Ative o JavaScript para experimentar a demonstração de conferência.</p></noscript>
+</body>
+</html>
